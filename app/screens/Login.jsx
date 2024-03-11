@@ -15,7 +15,7 @@ import {
 } from "@firebase/auth";
 import CustomButton from "../../components/CustomButton";
 
-const Login = () => {
+const Login = ({navigation}) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
@@ -27,6 +27,7 @@ const Login = () => {
         try {
             const response = await signInWithEmailAndPassword(auth, email, password);
             console.log(response);
+            navigation.navigate('Home');
         } catch (error) {
             console.log(error);
             alert("Sign in failed: " + error.message);
@@ -45,6 +46,7 @@ const Login = () => {
             );
             console.log(response);
             alert("Chceck your emails");
+            navigation.navigate('Home');
         } catch (error) {
             console.log(error);
             alert("Sign in failed: " + error.message);
@@ -77,7 +79,7 @@ const Login = () => {
                 ) : (
                     <View style={styles.button}>
                         <CustomButton title="Login" onPress={signIn}/>
-                        <CustomButton title="Create account" onPress={signIn}/>
+                        <CustomButton title="Create account" onPress={signUp}/>
                     </View>
                 )}
             </KeyboardAvoidingView>
